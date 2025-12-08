@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple CSV Viewer</title>
+  <meta name="description" content="View CSV files directly in your browser with a simple online CSV viewer.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Our own styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Handsontable CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@13.0.0/dist/handsontable.full.min.css">
+</head>
+<body>
+  <header class="top-bar">
+    <h1>Simple CSV Viewer</h1>
+    <p>Upload a CSV file and view it in a table.</p>
+  </header>
+
+  <main class="main">
+    <label class="file-label">
+      <span>Select a CSV file:</span>
+      <input type="file" id="input-file" accept=".csv" />
+    </label>
+
+    <div id="handsontable-container"></div>
+  </main>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@13.0.0/dist/handsontable.full.min.js"></script>
+
+  <!-- Our script -->
+  <script src="app.js"></script>
+</body>
+</html>
