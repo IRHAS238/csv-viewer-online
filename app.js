@@ -1,52 +1,44 @@
-// Get the HTML elements
-const inputFile = document.getElementById('input-file');
-const container = document.getElementById('handsontable-container');
+const input = document.getElementById("input-file");
+const container = document.getElementById("handsontable-container");
 
-let hotInstance = null;
+let hot = null;
 
-// When user selects a CSV file
-inputFile.addEventListener('change', function (event) {
-  const file = event.target.files[0];
+input.addEventListener("change", () => {
+  const file = input.files[0];
   if (!file) return;
 
-  // Use PapaParse to read the CSV
   Papa.parse(file, {
     complete: function (results) {
       const data = results.data;
 
-      // Remove empty last row if needed
-      if (data.length > 0 && data[data.length - 1].every(cell => cell === "")) {
+      // Remove empty last row
+      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
         data.pop();
       }
 
-      // If table already exists, destroy it
-      if (hotInstance) {
-        hotInstance.destroy();
-      }
+      // Destroy old table
+      if (hot) hot.destroy();
 
-      // Create Handsontable instance
-      hotInstance = new Handsontable(container, {
+      // CREATE TABLE WITH FILTERS + SORT + UNDO/REDO
+      hot = new Handsontable(container, {
         data: data,
         rowHeaders: true,
         colHeaders: true,
-        licenseKey: 'non-commercial-and-evaluation',
-        stretchH: 'all',
-        width: '100%',
-        height: 'auto',
+        height: "auto",
+        width: "100%",
+        stretchH: "all",
         manualColumnResize: true,
         manualRowResize: true,
 
-        // === NEW FEATURES ===
-        // Click on column headers to sort
-        columnSorting: true,
-
-        // Show filter menu on headers
-        filters: true,
+        // Enable Plugins
         dropdownMenu: true,
+        filters: true,
+        columnSorting: true,
+        undo: true,       // ← Added
+        redo: true,       // ← Added
+
+        licenseKey: "non-commercial-and-evaluation"
       });
-    },
-    error: function (err) {
-      alert('Error reading file: ' + err.message);
     }
   });
 });
