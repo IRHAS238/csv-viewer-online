@@ -1,27 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Simple CSV Viewer</title>
-  <meta name="description" content="View CSV files in your browser with an online CSV viewer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Our CSS -->
-  <link rel="stylesheet" href="styles.css">
 
   <!-- Handsontable CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@13/dist/handsontable.full.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
 </head>
-
 <body>
-  <main>
-    <h1>Simple CSV Viewer</h1>
 
-    <label>Select a CSV file:</label>
+  <h1>Simple CSV Viewer</h1>
+
+  <label>Select a CSV file:
     <input type="file" id="input-file" accept=".csv">
+  </label>
 
-    <div id="handsontable-container"></div>
-  </main>
+  <div id="handsontable-container" style="margin-top:20px;"></div>
 
   <!-- Handsontable JS -->
   <script src="https://cdn.jsdelivr.net/npm/handsontable@13/dist/handsontable.full.min.js"></script>
@@ -29,7 +28,8 @@
   <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5"></script>
 
-  <!-- Our script -->
+  <!-- App JS -->
   <script src="app.js"></script>
+
 </body>
 </html>
