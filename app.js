@@ -16,10 +16,10 @@ input.addEventListener("change", () => {
         data.pop();
       }
 
-      // Destroy old table
+      // Destroy old table if exists
       if (hot) hot.destroy();
 
-      // CREATE TABLE WITH FILTERS + SORT + UNDO/REDO
+      // CREATE HANDSONTABLE WITH FULL FEATURES
       hot = new Handsontable(container, {
         data: data,
         rowHeaders: true,
@@ -27,16 +27,22 @@ input.addEventListener("change", () => {
         height: "auto",
         width: "100%",
         stretchH: "all",
+
+        // Resize controls
         manualColumnResize: true,
         manualRowResize: true,
 
-        // Enable Plugins
+        // UI Plugins
         dropdownMenu: true,
         filters: true,
         columnSorting: true,
-        undo: true,       // ← Added
-        redo: true,       // ← Added
+        search: true,          // Search plugin enabled
 
+        // Undo / Redo
+        undo: true,
+        redo: true,
+
+        // Required license key
         licenseKey: "non-commercial-and-evaluation"
       });
     }
