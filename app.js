@@ -16,35 +16,35 @@ input.addEventListener("change", () => {
         data.pop();
       }
 
-      // Destroy previous table
+      // Destroy old table if exists
       if (hot) hot.destroy();
 
-      // Create Handsontable instance
+      // CREATE HANDSONTABLE WITH FULL FEATURES
       hot = new Handsontable(container, {
         data: data,
-
-        // Visual
         rowHeaders: true,
         colHeaders: true,
-        fixedRowsTop: 1,          // ← FREEZE HEADER ROW
         height: "auto",
         width: "100%",
         stretchH: "all",
 
-        // Interaction
+        // Resize controls
         manualColumnResize: true,
         manualRowResize: true,
 
-        // Plugins
+        // UI Plugins
         dropdownMenu: true,
         filters: true,
         columnSorting: true,
-        search: true,
+        search: true,          // Search plugin enabled
+
+        // Undo / Redo
         undo: true,
         redo: true,
 
-        // License
+        // Required license key
         licenseKey: "non-commercial-and-evaluation"
       });
     }
-  }
+  });
+});
