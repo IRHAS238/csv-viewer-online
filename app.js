@@ -29,12 +29,20 @@ inputFile.addEventListener('change', function (event) {
         data: data,
         rowHeaders: true,
         colHeaders: true,
-        licenseKey: 'non-commercial-and-evaluation', // required for Handsontable CE
+        licenseKey: 'non-commercial-and-evaluation',
         stretchH: 'all',
         width: '100%',
         height: 'auto',
         manualColumnResize: true,
-        manualRowResize: true
+        manualRowResize: true,
+
+        // === NEW FEATURES ===
+        // Click on column headers to sort
+        columnSorting: true,
+
+        // Show filter menu on headers
+        filters: true,
+        dropdownMenu: true,
       });
     },
     error: function (err) {
