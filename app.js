@@ -1,50 +1,23 @@
-const input = document.getElementById("input-file");
-const container = document.getElementById("handsontable-container");
+hot = new Handsontable(container, {
+  data: data,
 
-let hot = null;
+  rowHeaders: true,
+  colHeaders: true,
 
-input.addEventListener("change", () => {
-  const file = input.files[0];
-  if (!file) return;
+  fixedRowsTop: 2, // ✅ FREEZE first + second row
 
-  Papa.parse(file, {
-    complete: function (results) {
-      const data = results.data;
+  height: "auto",
+  width: "100%",
+  stretchH: "all",
 
-      // Remove empty last row
-      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
-        data.pop();
-      }
+  manualColumnResize: true,
+  manualRowResize: true,
 
-      // Destroy old table if exists
-      if (hot) hot.destroy();
+  dropdownMenu: true,
+  filters: true,
+  columnSorting: true,
+  undo: true,
+  redo: true,
 
-      // CREATE HANDSONTABLE WITH FULL FEATURES
-      hot = new Handsontable(container, {
-        data: data,
-        rowHeaders: true,
-        colHeaders: true,
-        height: "auto",
-        width: "100%",
-        stretchH: "all",
-
-        // Resize controls
-        manualColumnResize: true,
-        manualRowResize: true,
-
-        // UI Plugins
-        dropdownMenu: true,
-        filters: true,
-        columnSorting: true,
-        search: true,          // Search plugin enabled
-
-        // Undo / Redo
-        undo: true,
-        redo: true,
-
-        // Required license key
-        licenseKey: "non-commercial-and-evaluation"
-      });
-    }
-  });
+  licenseKey: "non-commercial-and-evaluation"
 });
