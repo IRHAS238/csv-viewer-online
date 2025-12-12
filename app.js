@@ -9,38 +9,40 @@ input.addEventListener("change", () => {
 
   Papa.parse(file, {
     complete: function (results) {
-      let data = results.data;
+      const data = results.data;
 
-      // remove empty last row
-      if (data.length && data[data.length - 1].every(c => c === "")) {
+      // Remove empty last row
+      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
         data.pop();
       }
 
+      // Destroy old table if exists
       if (hot) hot.destroy();
 
+      // CREATE HANDSONTABLE WITH FULL FEATURES
       hot = new Handsontable(container, {
         data: data,
-
         rowHeaders: true,
         colHeaders: true,
-
-        // 🔒 FREEZE FIRST TWO ROWS (metadata + real header)
-        fixedRowsTop: 2,
-
-        width: "100%",
         height: "auto",
+        width: "100%",
         stretchH: "all",
 
+        // Resize controls
         manualColumnResize: true,
         manualRowResize: true,
 
+        // UI Plugins
         dropdownMenu: true,
         filters: true,
         columnSorting: true,
+        search: true,          // Search plugin enabled
 
+        // Undo / Redo
         undo: true,
         redo: true,
 
+        // Required license key
         licenseKey: "non-commercial-and-evaluation"
       });
     }
