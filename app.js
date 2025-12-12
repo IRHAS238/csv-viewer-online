@@ -1,23 +1,50 @@
-hot = new Handsontable(container, {
-  data: data,
+const input = document.getElementById("input-file");
+const container = document.getElementById("handsontable-container");
 
-  rowHeaders: true,
-  colHeaders: true,
+let hot = null;
 
-  fixedRowsTop: 2, // ✅ FREEZE first + second row
+input.addEventListener("change", () => {
+  const file = input.files[0];
+  if (!file) return;
 
-  height: "auto",
-  width: "100%",
-  stretchH: "all",
+  Papa.parse(file, {
+    complete: function (results) {
+      const data = results.data;
 
-  manualColumnResize: true,
-  manualRowResize: true,
+      // Remove empty last row
+      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
+        data.pop();
+      }
 
-  dropdownMenu: true,
-  filters: true,
-  columnSorting: true,
-  undo: true,
-  redo: true,
+      // Destroy old table if exists
+      if (hot) hot.destroy();
 
-  licenseKey: "non-commercial-and-evaluation"
+      // CREATE HANDSONTABLE WITH FULL FEATURES
+      hot = new Handsontable(container, {
+        data: data,
+        rowHeaders: true,
+        colHeaders: true,
+        height: "auto",
+        width: "100%",
+        stretchH: "all",
+
+        // Resize controls
+        manualColumnResize: true,
+        manualRowResize: true,
+
+        // UI Plugins
+        dropdownMenu: true,
+        filters: true,
+        columnSorting: true,
+        search: true,          // Search plugin enabled
+
+        // Undo / Redo
+        undo: true,
+        redo: true,
+
+        // Required license key
+        licenseKey: "non-commercial-and-evaluation"
+      });
+    }
+  });
 });
