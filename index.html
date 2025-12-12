@@ -20,6 +20,30 @@
     <label>Select a CSV file:</label>
     <input type="file" id="input-file" accept=".csv">
 
+    <!-- PLACEHOLDER (before upload) -->
+    <div id="placeholder-table">
+      <table class="placeholder">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Domain</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Venue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td>01</td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REAL TABLE (after upload) -->
     <div id="handsontable-container"></div>
   </main>
 
