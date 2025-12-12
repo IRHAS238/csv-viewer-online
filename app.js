@@ -8,41 +8,45 @@ input.addEventListener("change", () => {
   if (!file) return;
 
   Papa.parse(file, {
+    skipEmptyLines: true,
     complete: function (results) {
-      const data = results.data;
+      let data = results.data;
 
-      // Remove empty last row
-      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
-        data.pop();
-      }
+      if (!data || data.length < 2) return;
 
-      // Destroy old table if exists
+      // ✅ Use FIRST row as column headers
+      const headers = data[0];
+
+      // ✅ Remove header row from data
+      data = data.slice(1);
+
+      // Destroy old table
       if (hot) hot.destroy();
 
-      // CREATE HANDSONTABLE WITH FULL FEATURES
       hot = new Handsontable(container, {
         data: data,
+
+        // ✅ Use real CSV headers
+        colHeaders: headers,
         rowHeaders: true,
-        colHeaders: true,
-        height: "auto",
+
+        // ✅ Freeze real header row
+        fixedRowsTop: 0,
+
         width: "100%",
+        height: "auto",
         stretchH: "all",
 
-        // Resize controls
         manualColumnResize: true,
         manualRowResize: true,
 
-        // UI Plugins
         dropdownMenu: true,
         filters: true,
         columnSorting: true,
-        search: true,          // Search plugin enabled
 
-        // Undo / Redo
         undo: true,
         redo: true,
 
-        // Required license key
         licenseKey: "non-commercial-and-evaluation"
       });
     }
