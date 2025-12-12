@@ -1,6 +1,5 @@
 const input = document.getElementById("input-file");
 const container = document.getElementById("handsontable-container");
-const placeholder = document.getElementById("placeholder-table");
 
 let hot = null;
 
@@ -15,27 +14,27 @@ input.addEventListener("change", () => {
 
       if (!data || data.length < 2) return;
 
-      // ✅ Hide placeholder after upload
-      placeholder.style.display = "none";
-
-      // ✅ First row becomes headers
+      // ✅ Use FIRST row as column headers
       const headers = data[0];
+
+      // ✅ Remove header row from data
       data = data.slice(1);
 
-      // Remove empty last row if exists
-      if (data.length > 0 && data[data.length - 1].every(v => v === "")) {
-        data.pop();
-      }
-
+      // Destroy old table
       if (hot) hot.destroy();
 
       hot = new Handsontable(container, {
         data: data,
-        colHeaders: headers,         // ✅ Real CSV headers
-        rowHeaders: index => index + 1, // ✅ Row numbers 1,2,3...
+
+        // ✅ Use real CSV headers
+        colHeaders: headers,
+        rowHeaders: true,
+
+        // ✅ Freeze real header row
+        fixedRowsTop: 0,
 
         width: "100%",
-        height: 600,
+        height: "auto",
         stretchH: "all",
 
         manualColumnResize: true,
@@ -53,3 +52,4 @@ input.addEventListener("change", () => {
     }
   });
 });
+
