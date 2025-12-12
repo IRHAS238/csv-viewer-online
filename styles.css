@@ -1,3 +1,4 @@
+/* Reset */
 * {
   box-sizing: border-box;
 }
@@ -9,50 +10,67 @@ body {
   color: #222;
 }
 
-.top-bar {
-  padding: 16px 24px;
-  background: #20232a;
-  color: #ffffff;
-  text-align: center;
-}
-
-.top-bar h1 {
-  margin: 0 0 4px;
-  font-size: 24px;
-}
-
-.top-bar p {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-.main {
-  max-width: 1000px;
+main {
+  max-width: 1100px;
   margin: 24px auto;
   padding: 0 16px 40px;
 }
 
-.file-label {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 6px;
+h1 {
   margin-bottom: 16px;
+}
+
+/* File input */
+#input-file {
+  margin-bottom: 20px;
+}
+
+/* =========================
+   PLACEHOLDER TABLE (0 / 01)
+   ========================= */
+#placeholder-table {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.placeholder {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.placeholder th,
+.placeholder td {
+  border: 1px solid #ddd;
+  padding: 8px;
   font-size: 14px;
 }
 
-#input-file {
-  padding: 6px;
+.placeholder th {
+  background: #f0f0f0;
+  font-weight: 600;
+  text-align: left;
 }
 
+.placeholder td:first-child {
+  width: 60px;
+  text-align: center;
+  background: #fafafa;
+}
+
+/* =========================
+   HANDSONTABLE
+   ========================= */
 #handsontable-container {
   background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
 }
 
-/* Make table usable on small screens */
+/* Limit height so header stays visible */
 .handsontable .wtHolder {
   max-height: 70vh;
 }
